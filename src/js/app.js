@@ -20,6 +20,16 @@ function Router($stateProvider, $urlRouterProvider) {
       url: '/register',
       templateUrl: '/templates/register.html',
       controller: 'RegisterController as register'
+    })
+    .state('boardsIndex', {
+      url: '/boards',
+      templateUrl: '/templates/boards/index.html',
+      controller: 'BoardsIndexController as boardsIndex'
+    })
+    .state('boardsNew', {
+      url: '/boards/new',
+      templateUrl: '/templates/boards/new.html',
+      controller: 'BoardsNewController as boardsNew'
     });
 
   $urlRouterProvider.otherwise('/');

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const authController = require('../controllers/auth');
 const usersController = require('../controllers/users');
+const boardsController = require('../controllers/boards');
 const secureRoute = require('../lib/secureRoute');
 
 router
@@ -14,5 +15,14 @@ router.route('/users/:id')
   .get(usersController.show)
   .put(secureRoute, usersController.update)
   .delete(secureRoute, usersController.delete);
+
+router.route('/boards')
+  .get(boardsController.index)
+  .post(boardsController.create);
+
+router.route('/boards/:id')
+  .get(boardsController.show)
+  .put(secureRoute, boardsController.update)
+  .delete(secureRoute, boardsController.delete);
 
 module.exports = router;

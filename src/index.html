@@ -15,6 +15,8 @@
           <li ng-if="!main.isLoggedIn()"><a ui-sref="register" ui-sref-active="active">Register</a></li>
           <li ng-if="!main.isLoggedIn()"><a ui-sref="login" ui-sref-active="active">Login</a></li>
           <li ng-if="main.isLoggedIn()"><a ng-click="main.logout()">Logout</a></li>
+          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsNew">New Board</a></li>
+          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsIndex">All Boards</a></li>
         </ul>
       </nav>
     </header>
