@@ -1,4 +1,74 @@
 @import 'partials/reset';
+@import 'partials/variables';
 @import 'bourbon/bourbon';
 @import 'neat/neat';
 @import 'base/base';
+
+body, button {
+  font-family: $font-family;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  background-color: $dark-gray;
+  color: white;
+  height: 50px;
+  margin-bottom: 20px;
+  nav {
+    @include outer-container;
+    padding: 0 20px;
+    ul {
+      li {
+        display: inline-block;
+        float: right;
+        line-height: 50px;
+        margin-left: 15px;
+        &:first-child {
+          float: left;
+          margin-left: 0;
+          font-size: 22px;
+          font-weight: bold;
+        }
+        a {
+          color: white;
+          &.active {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  @include outer-container;
+  padding: 0 20px;
+}
+
+.board {
+  &__pin {
+    @include span-columns(3);
+    @include omega(4n);
+    background-color: lightgray;
+    margin-bottom: 20px;
+    position: relative;
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+    a {
+      @include position(absolute, 0 0 0 0);
+      color: white;
+      h2 {
+        @include position(absolute, 50% null null 50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 80%;
+      }
+    }
+  }
+}

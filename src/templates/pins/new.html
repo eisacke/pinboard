@@ -1,0 +1,17 @@
+<section>
+  <form ng-submit="pinsNew.create()">
+    <div>
+      <label>Source</label>
+      <input type="text" name="title" placeholder="Title" ng-model="pinsNew.pin.source">
+    </div>
+    <div>
+      <label>Type</label>
+      <select ng-model="pinsNew.pin.type">
+        <option value="image">Image</option>
+        <option value="text">Text</option>
+        <option value="audio">Audio</option>
+      </select>
+    </div>
+    <button>Create</button>
+  </form>
+</section>

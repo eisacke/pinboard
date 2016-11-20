@@ -21,6 +21,11 @@ function Router($stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/register.html',
       controller: 'RegisterController as register'
     })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: '/templates/boards/profile.html',
+      controller: 'BoardsProfileController as boardsProfile'
+    })
     .state('boardsIndex', {
       url: '/boards',
       templateUrl: '/templates/boards/index.html',
@@ -30,6 +35,16 @@ function Router($stateProvider, $urlRouterProvider) {
       url: '/boards/new',
       templateUrl: '/templates/boards/new.html',
       controller: 'BoardsNewController as boardsNew'
+    })
+    .state('boardsShow', {
+      url: '/boards/:id',
+      templateUrl: '/templates/boards/show.html',
+      controller: 'BoardsShowController as boardsShow'
+    })
+    .state('boardsEdit', {
+      url: '/boards/:id/edit',
+      templateUrl: '/templates/boards/edit.html',
+      controller: 'BoardsEditController as boardsEdit'
     });
 
   $urlRouterProvider.otherwise('/');

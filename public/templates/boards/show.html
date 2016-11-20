@@ -1,0 +1,4 @@
+<h1>{{ boardsShow.board.title }}</h1>
+<p>{{ boardsShow.board }}</p>
+<a ui-sref="boardsEdit({id: boardsShow.board._id})">Edit</a>
+<button ng-click="boardsShow.delete()">Delete</button>

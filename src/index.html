@@ -5,6 +5,7 @@
     <title></title>
     <!-- <link rel="stylesheet" href="/css/vendor.css"> -->
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
     <script src="/js/vendor.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
   </head>
@@ -12,16 +13,17 @@
     <header>
       <nav>
         <ul>
+          <li><a ui-sref="home">Pinboard</a></li>
           <li ng-if="!main.isLoggedIn()"><a ui-sref="register" ui-sref-active="active">Register</a></li>
           <li ng-if="!main.isLoggedIn()"><a ui-sref="login" ui-sref-active="active">Login</a></li>
-          <li ng-if="main.isLoggedIn()"><a ng-click="main.logout()">Logout</a></li>
-          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsNew">New Board</a></li>
-          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsIndex">All Boards</a></li>
+          <li ng-if="main.isLoggedIn()"><a href="#" ng-click="main.logout()" ui-sref-active="active">Logout</a></li>
+          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsNew" ui-sref-active="active">New Board</a></li>
+          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsIndex" ui-sref-active="active">All Boards</a></li>
+          <li ng-if="main.isLoggedIn()"><a ui-sref="profile" ui-sref-active="active">My Boards</a></li>
         </ul>
       </nav>
     </header>
     <p ng-if="main.message">{{ main.message }}</p>
-    <h1>Pinboard</h1>
     <main ui-view></main>
   </body>
 </html>

@@ -1,7 +1,7 @@
 const Board = require('../models/board');
 
 function boardsIndex(req, res) {
-  Board.find((err, boards) => {
+  Board.find(req.query, (err, boards) => {
     if(err) return res.status(500).json({ error: err });
     return res.json(boards);
   });
@@ -15,7 +15,9 @@ function boardsCreate(req, res) {
 }
 
 function boardsShow(req, res) {
-  Board.findById(req.params.id, (err, board) => {
+  Board.findById(req.params.id)
+  // .populate('user')
+  .exec((err, board) => {
     if(err) return res.status(500).json({ error: err });
     if(!board) return res.status(404).json({ error: 'Not found' });
     return res.json(board);
