@@ -16,7 +16,7 @@ function boardsCreate(req, res) {
 
 function boardsShow(req, res) {
   Board.findById(req.params.id)
-  // .populate('user')
+  .populate('user')
   .exec((err, board) => {
     if(err) return res.status(500).json({ error: err });
     if(!board) return res.status(404).json({ error: 'Not found' });
@@ -34,6 +34,7 @@ function boardsUpdate(req, res) {
     }
 
     board.save((err, board) => {
+      console.log(err);
       if(err) return res.status(400).json({ error: err });
       res.json(board);
     });

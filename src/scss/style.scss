@@ -4,12 +4,43 @@
 @import 'neat/neat';
 @import 'base/base';
 
+// variables
+
+// extends
+.overlay {
+  @include position(absolute, 0 0 0 0);
+  background-color: rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+*, *:before, *:after {box-sizing:  border-box !important;}
+
 body, button {
   font-family: $font-family;
 }
 
 a {
   text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 header {
@@ -49,9 +80,14 @@ main {
 }
 
 .board {
+  &__overlay {
+    @extend .overlay;
+  }
   &__pin {
     @include span-columns(3);
     @include omega(4n);
+    background-size: cover;
+    background-position: center;
     background-color: lightgray;
     margin-bottom: 20px;
     position: relative;
@@ -70,5 +106,48 @@ main {
         width: 80%;
       }
     }
+    &:hover {
+      .board__overlay {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.pins {
+  -moz-column-width: 13em;
+  -webkit-column-width: 13em;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em;
+  &__add {
+    float: right;
+  }
+  &__pin {
+    display: inline-block;
+    margin:  0.25rem;
+    width:  100%;
+    position: relative;
+    &:hover {
+      .pins__overlay {
+        opacity: 1;
+      }
+    }
+  }
+  &__overlay {
+    @extend .overlay;
+    color: #FFFFFF;
+    padding: 10px;
+    font-size: 12px;
+    cursor: default;
+    .like {
+      cursor: pointer;
+      margin-right: 5px;
+    }
+  }
+}
+
+.modal {
+  &__inner {
+    
   }
 }

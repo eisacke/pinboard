@@ -1,4 +1,29 @@
-<h1>{{ boardsShow.board.title }}</h1>
-<p>{{ boardsShow.board }}</p>
-<a ui-sref="boardsEdit({id: boardsShow.board._id})">Edit</a>
+<button class="pins__add" ng-click="boardsShow.toggleForm()">Add pin</button>
+<h2>{{boardsShow.board.title}}</h2>
+<h3>{{boardsShow.user.username}}</h3>
+
+<ul class="pins">
+  <li ng-repeat="pin in boardsShow.board.pins" class="pins__pin">
+    <img ng-if="pin.type == 'image'" ng-src="{{ pin.source }}">
+    <div class="pins__overlay"><span class="like" ng-click="boardsShow.like(pin)">&hearts;</span> {{pin.likes.length || 0}} likes</div>
+  </li>
+</ul>
+
+<button ui-sref="boardsEdit({id: boardsShow.board._id})">Edit</button>
 <button ng-click="boardsShow.delete()">Delete</button>
+
+<form ng-submit="boardsShow.createPin()" ng-show="boardsShow.formVisible">
+  <div>
+    <label>Source</label>
+    <input type="text" name="title" placeholder="Title" ng-model="boardsShow.pin.source">
+  </div>
+  <div>
+    <label>Type</label>
+    <select ng-model="boardsShow.pin.type">
+      <option value="image">Image</option>
+      <option value="text">Text</option>
+      <option value="audio">Audio</option>
+    </select>
+  </div>
+  <button>Create</button>
+</form>

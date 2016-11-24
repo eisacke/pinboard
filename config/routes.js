@@ -17,11 +17,11 @@ router.route('/users/:id')
   .delete(secureRoute, usersController.delete);
 
 router.route('/boards')
-  .get(secureRoute, boardsController.index)
+  .get(boardsController.index)
   .post(secureRoute, boardsController.create);
 
 router.route('/boards/:id')
-  .get(secureRoute, boardsController.show)
+  .get(boardsController.show)
   .put(secureRoute, boardsController.update)
   .delete(secureRoute, boardsController.delete);
 

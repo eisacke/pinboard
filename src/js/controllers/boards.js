@@ -30,7 +30,6 @@ function BoardsNewController(Board, $state, $auth) {
   boardsNew.board.user = currentUser;
 
   function create() {
-    console.log(boardsNew.board);
     Board.save(boardsNew.board, () => {
       $state.go('boardsIndex');
     });
@@ -42,8 +41,20 @@ function BoardsNewController(Board, $state, $auth) {
 BoardsShowController.$inject = ['Board', '$state', '$auth'];
 function BoardsShowController(Board, $state, $auth) {
   const boardsShow = this;
+  const currentUser = $auth.getPayload()._id;
+  boardsShow.pin = {};
+  boardsShow.formVisible = false;
+  boardsShow.toggleForm = toggleForm;
 
-  boardsShow.board = Board.get($state.params);
+  function toggleForm() {
+    console.log('clicked');
+    boardsShow.formVisible = boardsShow.formVisible ? false : true;
+  }
+
+  Board.get($state.params).$promise.then((board) => {
+    boardsShow.board = board;
+    boardsShow.user = board.user;
+  });
 
   function deleteBoard() {
     boardsShow.board.$remove(() => {
@@ -51,7 +62,26 @@ function BoardsShowController(Board, $state, $auth) {
     });
   }
 
+  function createPin(){
+    boardsShow.board.pins.push(boardsShow.pin);
+    boardsShow.board.$update(() => {
+      boardsShow.pin = {};
+    });
+  }
+
+  function like(pin) {
+    if (pin.likes.indexOf(currentUser) === -1) {
+      pin.likes.push(currentUser);
+    } else {
+      const index = pin.likes.indexOf(currentUser);
+      pin.likes.splice(index, 1);
+    }
+    boardsShow.board.$update();
+  }
+
   boardsShow.delete = deleteBoard;
+  boardsShow.createPin = createPin;
+  boardsShow.like = like;
   boardsShow.isLoggedIn = $auth.isAuthenticated;
 }
 
