@@ -10,7 +10,7 @@
 // extends
 .overlay {
   @include position(absolute, 0 0 0 0);
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(0, 0, 0, 0.25);
   opacity: 0;
   transition: all 0.2s ease;
 }
@@ -76,7 +76,13 @@ header {
         a {
           color: white;
           &.active {
-            font-weight: bold;
+            position: relative;
+            &:after {
+              content: "";
+              @include position(absolute, null 0 -2px 0);
+              background-color: #FFFFFF;
+              height: 2px;
+            }
           }
         }
       }
@@ -114,6 +120,17 @@ main {
   padding: 0 20px;
   position: relative;
   margin-bottom: 50px;
+}
+
+.hero {
+  background-image:url('../assets/images/bg.jpg');
+  height: calc(100vh - 50px);
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 50px;
+  left: 0;
 }
 
 .boards--show {
@@ -208,17 +225,32 @@ main {
   }
   &__overlay {
     @extend .overlay;
+    bottom: 0.25em;
     color: #FFFFFF;
     padding: 10px;
     font-size: 12px;
     cursor: default;
     .like {
       cursor: pointer;
-      margin-right: 5px;
+      @extend .icon-heart;
+      position: relative;
+      padding-left: 20px;
+      &:before {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+      &.liked {
+        &:before {
+          color: #ff8399;
+        }
+      }
     }
     .delete {
       @include position(absolute, null null 10px 10px);
       cursor: pointer;
+      @extend .icon-trash;
     }
   }
 }

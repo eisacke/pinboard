@@ -41,7 +41,7 @@ function BoardsNewController(Board, $state, $auth) {
 BoardsShowController.$inject = ['Board', '$state', '$auth'];
 function BoardsShowController(Board, $state, $auth) {
   const boardsShow = this;
-  const currentUser = $auth.getPayload()._id;
+  boardsShow.currentUser = $auth.getPayload()._id;
   boardsShow.pin = {};
   boardsShow.formVisible = false;
   boardsShow.belongsToUser = false;
@@ -61,7 +61,7 @@ function BoardsShowController(Board, $state, $auth) {
   Board.get($state.params).$promise.then((board) => {
     boardsShow.board = board;
     boardsShow.user = board.user;
-    if(board.user._id === currentUser) {
+    if(board.user._id === boardsShow.currentUser) {
       boardsShow.belongsToUser = true;
     }
   });
@@ -75,10 +75,10 @@ function BoardsShowController(Board, $state, $auth) {
   }
 
   function like(pin) {
-    if (pin.likes.indexOf(currentUser) === -1) {
-      pin.likes.push(currentUser);
+    if (pin.likes.indexOf(boardsShow.currentUser) === -1) {
+      pin.likes.push(boardsShow.currentUser);
     } else {
-      const index = pin.likes.indexOf(currentUser);
+      const index = pin.likes.indexOf(boardsShow.currentUser);
       pin.likes.splice(index, 1);
     }
     boardsShow.board.$update();
