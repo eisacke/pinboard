@@ -1,29 +1,32 @@
-<button class="pins__add" ng-click="boardsShow.toggleForm()">Add pin</button>
-<h2>{{boardsShow.board.title}}</h2>
-<h3>{{boardsShow.user.username}}</h3>
+<div class="boards--show">
+  <h2 ng-class="{ edit: boardsShow.belongsToUser }" ui-sref="boardsEdit({id: boardsShow.board._id})">{{boardsShow.board.title}}</h2>
+  <h3>{{boardsShow.user.username}}</h3>
+  <button class="pins__add" ng-click="boardsShow.toggleForm()">Add pin</button>
 
-<ul class="pins">
-  <li ng-repeat="pin in boardsShow.board.pins" class="pins__pin">
-    <img ng-if="pin.type == 'image'" ng-src="{{ pin.source }}">
-    <div class="pins__overlay"><span class="like" ng-click="boardsShow.like(pin)">&hearts;</span> {{pin.likes.length || 0}} likes</div>
-  </li>
-</ul>
+  <ul class="pins">
+    <li ng-repeat="pin in boardsShow.board.pins" class="pins__pin">
+      <img ng-if="pin.type == 'image'" ng-src="{{ pin.source }}">
+      <div class="pins__overlay"><span class="like" ng-click="boardsShow.like(pin)">&hearts;</span> {{pin.likes.length || 0}} likes<span class="delete" ng-click="boardsShow.deletePin(pin)" ng-if="boardsShow.belongsToUser">Delete</span></div>
+    </li>
+  </ul>
 
-<button ui-sref="boardsEdit({id: boardsShow.board._id})">Edit</button>
-<button ng-click="boardsShow.delete()">Delete</button>
-
-<form ng-submit="boardsShow.createPin()" ng-show="boardsShow.formVisible">
-  <div>
-    <label>Source</label>
-    <input type="text" name="title" placeholder="Title" ng-model="boardsShow.pin.source">
+  <div class="modal" ng-show="boardsShow.formVisible">
+    <div class="modal__inner">
+      <form ng-submit="boardsShow.createPin()">
+        <div>
+          <label>Source</label>
+          <input type="text" name="title" placeholder="Title" ng-model="boardsShow.pin.source">
+        </div>
+        <div>
+          <label>Type</label>
+          <select ng-model="boardsShow.pin.type">
+            <option value="image">Image</option>
+            <option value="text">Text</option>
+            <option value="audio">Audio</option>
+          </select>
+        </div>
+        <button>Create</button><button ng-click="boardsShow.toggleForm()">Cancel</button>
+      </form>
+    </div>
   </div>
-  <div>
-    <label>Type</label>
-    <select ng-model="boardsShow.pin.type">
-      <option value="image">Image</option>
-      <option value="text">Text</option>
-      <option value="audio">Audio</option>
-    </select>
-  </div>
-  <button>Create</button>
-</form>
+</div>

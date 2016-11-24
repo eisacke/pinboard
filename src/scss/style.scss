@@ -1,4 +1,5 @@
 @import 'partials/reset';
+@import 'partials/fonts';
 @import 'partials/variables';
 @import 'bourbon/bourbon';
 @import 'neat/neat';
@@ -57,16 +58,50 @@ header {
         float: right;
         line-height: 50px;
         margin-left: 15px;
-        &:first-child {
+        &.logo {
           float: left;
           margin-left: 0;
           font-size: 22px;
           font-weight: bold;
         }
+        &.burger {
+          display: none;
+        }
+        @media screen and (max-width: 767px) {
+          &.burger {
+            display: block;
+            cursor: pointer;
+          }
+        }
         a {
           color: white;
           &.active {
             font-weight: bold;
+          }
+        }
+      }
+      .dropdown {
+        display: block;
+        @media screen and (max-width: 767px) {
+          padding: 10px 20px;
+          display: none;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          right: 0;
+          background-color: white;
+          z-index: 1;
+          border-bottom: 2px solid $dark-gray;
+          &.active {
+            display: block;
+          }
+          li {
+            display: block;
+            float: none;
+            margin: 0;
+            a {
+              color: $dark-gray;
+            }
           }
         }
       }
@@ -77,6 +112,32 @@ header {
 main {
   @include outer-container;
   padding: 0 20px;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.boards--show {
+  .edit {
+    @extend .icon-pencil;
+    position: relative;
+    display: inline-block;
+    padding-right: 30px;
+    &:before {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      cursor: pointer;
+      font-size: 20px;
+      top: 50%;
+      transform: translate(0, -50%);
+      transition: all 0.2s ease;
+    }
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .board {
@@ -86,6 +147,10 @@ main {
   &__pin {
     @include span-columns(3);
     @include omega(4n);
+    @media screen and (max-width: 767px) {
+      @include span-columns(6);
+      @include omega(2n);
+    }
     background-size: cover;
     background-position: center;
     background-color: lightgray;
@@ -120,11 +185,19 @@ main {
   -moz-column-gap: 1em;
   -webkit-column-gap: 1em;
   &__add {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    @media screen and (max-width: 767px) {
+      position: static;
+      margin-bottom: 10px;
+      margin-top: 0.25em;
+      width: 100%;
+    }
   }
   &__pin {
     display: inline-block;
-    margin:  0.25rem;
+    margin: 0.25rem 0;
     width:  100%;
     position: relative;
     &:hover {
@@ -143,11 +216,21 @@ main {
       cursor: pointer;
       margin-right: 5px;
     }
+    .delete {
+      @include position(absolute, null null 10px 10px);
+      cursor: pointer;
+    }
   }
 }
 
 .modal {
+  @include position(fixed, 0 0 0 0);
+  background-color: rgba(0, 0, 0, 0.25);
   &__inner {
-    
+    width: 50%;
+    @include position(absolute, 50% null null 50%);
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ffffff;
   }
 }

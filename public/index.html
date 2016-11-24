@@ -13,13 +13,16 @@
     <header>
       <nav>
         <ul>
-          <li><a ui-sref="home">Pinboard</a></li>
-          <li ng-if="!main.isLoggedIn()"><a ui-sref="register" ui-sref-active="active">Register</a></li>
-          <li ng-if="!main.isLoggedIn()"><a ui-sref="login" ui-sref-active="active">Login</a></li>
-          <li ng-if="main.isLoggedIn()"><a href="#" ng-click="main.logout()" ui-sref-active="active">Logout</a></li>
-          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsNew" ui-sref-active="active">New Board</a></li>
-          <li ng-if="main.isLoggedIn()"><a ui-sref="boardsIndex" ui-sref-active="active">All Boards</a></li>
-          <li ng-if="main.isLoggedIn()"><a ui-sref="profile" ui-sref-active="active">My Boards</a></li>
+          <li class="logo"><a ui-sref="home">Pinboard</a></li>
+          <li ng-click="main.toggleNav()" class="burger">&#9776;</li>
+          <div ng-class="{ active: main.menuVisible }" class="dropdown">
+            <li ng-if="!main.isLoggedIn()"><a ui-sref="register" ui-sref-active="active">Register</a></li>
+            <li ng-if="!main.isLoggedIn()"><a ui-sref="login" ui-sref-active="active">Login</a></li>
+            <li ng-if="main.isLoggedIn()"><a href="#" ng-click="main.logout()" ui-sref-active="active">Logout</a></li>
+            <li ng-if="main.isLoggedIn()"><a ui-sref="boardsNew" ui-sref-active="active">New Board</a></li>
+            <li ng-if="main.isLoggedIn()"><a ui-sref="boardsIndex" ui-sref-active="active">All Boards</a></li>
+            <li ng-if="main.isLoggedIn()"><a ui-sref="profile" ui-sref-active="active">My Boards</a></li>
+          </div>
         </ul>
       </nav>
     </header>

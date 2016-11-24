@@ -1,5 +1,6 @@
-<ul>
-  <li ng-repeat="board in boardsProfile.all">
+<ul class="board">
+  <li ng-repeat="board in boardsProfile.all" class="board__pin" style="background-image:url('{{ board.pins[0].source }}')">
+    <div class="board__overlay"></div>
     <a ui-sref="boardsShow({ id: board._id })">
       <h2>{{ board.title }}</h2>
     </a>

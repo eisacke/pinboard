@@ -1,4 +1,4 @@
-<h1>Edit Board</h1>
+<h2>Edit Board</h2>
 <form ng-submit="boardsEdit.update()">
   <div>
     <label>Title</label>
@@ -6,3 +6,5 @@
   </div>
   <button>Update</button>
 </form>
+<button ng-click="boardsEdit.delete()">Delete</button>
+<button ui-sref="boardsShow({id: boardsEdit.board._id})">Cancel</button>

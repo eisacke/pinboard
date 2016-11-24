@@ -6,6 +6,12 @@ function MainController($auth, $state, $rootScope) {
   const main = this;
 
   main.isLoggedIn = $auth.isAuthenticated;
+  main.toggleNav = toggleNav;
+  main.menuVisible = false;
+
+  function toggleNav() {
+    main.menuVisible = main.menuVisible ? false : true;
+  }
 
   function logout() {
     $auth.logout()
@@ -21,6 +27,7 @@ function MainController($auth, $state, $rootScope) {
   const protectedStates = [];
 
   function secureState(e, toState) {
+    main.menuVisible = false;
     main.message = null;
     if(!$auth.isAuthenticated() && protectedStates.includes(toState.name)) {
       e.preventDefault();
