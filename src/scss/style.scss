@@ -4,6 +4,7 @@
 @import 'bourbon/bourbon';
 @import 'neat/neat';
 @import 'base/base';
+@import 'partials/typography';
 
 // extends
 .overlay {
@@ -15,38 +16,50 @@
 
 *, *:before, *:after {box-sizing:  border-box !important;}
 
-body, button {
+body {
   font-family: $font-family;
-}
-
-a {
-  text-decoration: none;
 }
 
 img {
   max-width: 100%;
 }
 
-h1 {
-
+main {
+  @include outer-container;
+  padding: 0 20px;
+  position: relative;
+  margin-bottom: 50px;
 }
 
-h2 {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+form {
+  button {
+    width: 100%;
+  }
+  &.auth {
+    @include span-columns(6);
+    @include shift(3);
+    @media screen and (max-width: 767px) {
+      @include span-columns(12);
+      @include shift(0);
+    }
+    button {
+      margin-bottom: 20px;
+    }
+    p {
+      font-style: italic;
+      text-align: center;
+      a {
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 header {
   background-color: $dark-gray;
   color: white;
   height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   nav {
     @include outer-container;
     padding: 0 20px;
@@ -87,15 +100,20 @@ header {
       .dropdown {
         display: block;
         @media screen and (max-width: 767px) {
-          padding: 10px 20px;
           display: none;
-          position: absolute;
-          top: 50px;
-          left: 0;
-          right: 0;
-          background-color: white;
-          z-index: 1;
-          border-bottom: 2px solid $dark-gray;
+          @include position(fixed, 50px 0 0 0);
+          background-color: rgba(0, 0, 0, 0.25);
+          z-index: 100;
+          &__inner {
+            padding: 10px 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            z-index: 1;
+            border-bottom: 2px solid $dark-gray;
+          }
           &.active {
             display: block;
           }
@@ -113,13 +131,6 @@ header {
   }
 }
 
-main {
-  @include outer-container;
-  padding: 0 20px;
-  position: relative;
-  margin-bottom: 50px;
-}
-
 .hero {
   background-image:url('../assets/images/bg.jpg');
   height: calc(100vh - 50px);
@@ -129,6 +140,16 @@ main {
   position: fixed;
   top: 50px;
   left: 0;
+  h1 {
+    @include position(absolute, 50% null null 50%);
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: #FFFFFF;
+    font-weight: bold;
+    @media screen and (max-width: 767px) {
+      font-size: 40px;
+    }
+  }
 }
 
 .boards--show {

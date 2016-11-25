@@ -1,4 +1,4 @@
-<form novalidate ng-submit="register.submit()">
+<form novalidate ng-submit="register.submit()" class="auth">
   <div class="row">
     <label>Username</label>
     <input class="u-full-width" type="text" placeholder="Username" ng-model="register.user.username">
@@ -15,6 +15,6 @@
     <label>Password Confirmation</label>
     <input class="u-full-width" type="password" placeholder="Password Confirmation" ng-model="register.user.passwordConfirmation">
   </div>
-
   <button>Register</button>
+  <p>Already have an account? Click <a ui-sref="login">here</a> to login.</p>
 </form>

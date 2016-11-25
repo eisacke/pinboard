@@ -46,6 +46,21 @@ function BoardsShowController(Board, $state, $auth) {
   boardsShow.belongsToUser = false;
   boardsShow.deletePin = deletePin;
   boardsShow.toggleForm = toggleForm;
+  boardsShow.delete = deleteBoard;
+  boardsShow.repinPin = repinPin;
+  boardsShow.update = update;
+  boardsShow.createPin = createPin;
+  boardsShow.repin = repin;
+  boardsShow.like = like;
+  boardsShow.isLoggedIn = $auth.isAuthenticated;
+
+  Board.get($state.params).$promise.then((board) => {
+    boardsShow.board = board;
+    boardsShow.user = board.user;
+    if(board.user._id === boardsShow.currentUser) {
+      boardsShow.belongsToUser = true;
+    }
+  });
 
   function deletePin(pin) {
     const index = boardsShow.board.pins.indexOf(pin);
@@ -61,6 +76,7 @@ function BoardsShowController(Board, $state, $auth) {
     Board.query({user: boardsShow.currentUser}).$promise.then((boards) => {
       boardsShow.userBoards = boards;
       boardsShow.selectedPin = pin;
+      boardsShow.formVisible = true;
     });
   }
 
@@ -70,14 +86,6 @@ function BoardsShowController(Board, $state, $auth) {
       $state.go('boardsShow', {id: board._id});
     });
   }
-
-  Board.get($state.params).$promise.then((board) => {
-    boardsShow.board = board;
-    boardsShow.user = board.user;
-    if(board.user._id === boardsShow.currentUser) {
-      boardsShow.belongsToUser = true;
-    }
-  });
 
   function createPin(){
     boardsShow.board.pins.push(boardsShow.pin);
@@ -109,11 +117,4 @@ function BoardsShowController(Board, $state, $auth) {
     });
   }
 
-  boardsShow.delete = deleteBoard;
-  boardsShow.repinPin = repinPin;
-  boardsShow.update = update;
-  boardsShow.createPin = createPin;
-  boardsShow.repin = repin;
-  boardsShow.like = like;
-  boardsShow.isLoggedIn = $auth.isAuthenticated;
 }
