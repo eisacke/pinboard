@@ -1,0 +1,9 @@
+<form ng-submit="boardsShow.update()">
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" placeholder="Title" ng-model="boardsShow.board.title">
+  </div>
+  <button>Update</button>
+</form>
+<button ng-click="boardsShow.delete()">Delete</button>
+<button ng-click="boardsShow.toggleForm()">Cancel</button>

@@ -40,3 +40,15 @@
     content:'\0043';
   }
 }
+.icon-pin {
+  @extend .icon;
+  &:before {
+    content:'\0044';
+  }
+}
+.icon-cross {
+  @extend .icon;
+  &:before {
+    content:'\0045';
+  }
+}

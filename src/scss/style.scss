@@ -157,11 +157,11 @@ main {
   }
 }
 
-.board {
+.boards {
   &__overlay {
     @extend .overlay;
   }
-  &__pin {
+  &__board {
     @include span-columns(3);
     @include omega(4n);
     @media screen and (max-width: 767px) {
@@ -252,17 +252,29 @@ main {
       cursor: pointer;
       @extend .icon-trash;
     }
+    .pin {
+      @extend .icon-pin;
+      @include position(absolute, 10px 10px null null)
+      font-size: 18px;
+      cursor: pointer;
+    }
   }
 }
 
 .modal {
   @include position(fixed, 0 0 0 0);
   background-color: rgba(0, 0, 0, 0.25);
+  z-index: 100;
   &__inner {
     width: 50%;
     @include position(absolute, 50% null null 50%);
     transform: translate(-50%, -50%);
-    padding: 20px;
+    padding: 20px 20px 0;
+    padding-bottom: calc(20px - 0.75em);
     background-color: #ffffff;
+    button {
+      width: 100%;
+      margin-bottom: 0.75em;
+    }
   }
 }

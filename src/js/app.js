@@ -9,7 +9,6 @@ function Router($stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/',
       templateUrl: '/templates/home.html'
-      // controller: 'LoginController as login'
     })
     .state('login', {
       url: '/login',
@@ -41,10 +40,29 @@ function Router($stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/boards/show.html',
       controller: 'BoardsShowController as boardsShow'
     })
-    .state('boardsEdit', {
-      url: '/boards/:id/edit',
-      templateUrl: '/templates/boards/edit.html',
-      controller: 'BoardsEditController as boardsEdit'
+    .state('boardsShow.edit', {
+      url: '/edit',
+      views: {
+        'form@boardsShow': {
+          templateUrl: '/templates/boards/forms/editBoard.html'
+        }
+      }
+    })
+    .state('boardsShow.newPin', {
+      url: '/newPin',
+      views: {
+        'form@boardsShow': {
+          templateUrl: '/templates/boards/forms/newPin.html'
+        }
+      }
+    })
+    .state('boardsShow.repin', {
+      url: '/repin',
+      views: {
+        'form@boardsShow': {
+          templateUrl: '/templates/boards/forms/repin.html'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/');

@@ -8,6 +8,8 @@ function MainController($auth, $state, $rootScope) {
   main.isLoggedIn = $auth.isAuthenticated;
   main.toggleNav = toggleNav;
   main.menuVisible = false;
+  main.logout = logout;
+  main.message = null;
 
   function toggleNav() {
     main.menuVisible = main.menuVisible ? false : true;
@@ -20,9 +22,6 @@ function MainController($auth, $state, $rootScope) {
       });
   }
 
-  main.logout = logout;
-
-  main.message = null;
   // const protectedStates = ['filmsEdit', 'filmsNew'];
   const protectedStates = [];
 

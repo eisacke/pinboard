@@ -2,7 +2,6 @@ angular.module('pinboardApp')
   .controller('BoardsIndexController', BoardsIndexController)
   .controller('BoardsNewController', BoardsNewController)
   .controller('BoardsShowController', BoardsShowController)
-  .controller('BoardsEditController', BoardsEditController)
   .controller('BoardsProfileController', BoardsProfileController);
 
 BoardsIndexController.$inject = ['Board'];
@@ -45,8 +44,8 @@ function BoardsShowController(Board, $state, $auth) {
   boardsShow.pin = {};
   boardsShow.formVisible = false;
   boardsShow.belongsToUser = false;
-  boardsShow.toggleForm = toggleForm;
   boardsShow.deletePin = deletePin;
+  boardsShow.toggleForm = toggleForm;
 
   function deletePin(pin) {
     const index = boardsShow.board.pins.indexOf(pin);
@@ -56,6 +55,14 @@ function BoardsShowController(Board, $state, $auth) {
 
   function toggleForm() {
     boardsShow.formVisible = boardsShow.formVisible ? false : true;
+  }
+
+  function repin(pin) {
+    Board.query({user: boardsShow.currentUser}).$promise.then((boards) => {
+      boardsShow.userBoards = boards;
+
+    });
+    console.log(pin);
   }
 
   Board.get($state.params).$promise.then((board) => {
@@ -84,30 +91,22 @@ function BoardsShowController(Board, $state, $auth) {
     boardsShow.board.$update();
   }
 
-  boardsShow.createPin = createPin;
-  boardsShow.like = like;
-  boardsShow.isLoggedIn = $auth.isAuthenticated;
-}
-
-BoardsEditController.$inject = ['Board', '$state'];
-function BoardsEditController(Board, $state) {
-  const boardsEdit = this;
-
-  boardsEdit.board = Board.get($state.params);
-
   function update() {
-    boardsEdit.board.$update(() => {
-      $state.go('boardsShow', $state.params);
+    boardsShow.board.$update(() => {
+      boardsShow.formVisible = false;
     });
   }
 
   function deleteBoard() {
-    boardsEdit.board.$remove(() => {
+    boardsShow.board.$remove(() => {
       $state.go('boardsIndex');
     });
   }
 
-  boardsEdit.delete = deleteBoard;
-  boardsEdit.update = update;
-
+  boardsShow.delete = deleteBoard;
+  boardsShow.update = update;
+  boardsShow.createPin = createPin;
+  boardsShow.repin = repin;
+  boardsShow.like = like;
+  boardsShow.isLoggedIn = $auth.isAuthenticated;
 }
