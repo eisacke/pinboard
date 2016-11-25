@@ -64,7 +64,10 @@ function BoardsShowController(Board, $state, $auth) {
   });
 
   function mobile($index) {
-    boardsShow.board.pins[$index].active = boardsShow.board.pins[$index].active ? false : true; 
+    boardsShow.board.pins.forEach((pin)=> {
+      pin.active = false;
+    });
+    boardsShow.board.pins[$index].active = boardsShow.board.pins[$index].active ? false : true;
   }
 
   function deletePin(pin) {
