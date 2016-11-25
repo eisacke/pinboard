@@ -60,9 +60,15 @@ function BoardsShowController(Board, $state, $auth) {
   function repin(pin) {
     Board.query({user: boardsShow.currentUser}).$promise.then((boards) => {
       boardsShow.userBoards = boards;
-
+      boardsShow.selectedPin = pin;
     });
-    console.log(pin);
+  }
+
+  function repinPin(board) {
+    board.pins.push(boardsShow.selectedPin);
+    board.$update((board) => {
+      $state.go('boardsShow', {id: board._id});
+    });
   }
 
   Board.get($state.params).$promise.then((board) => {
@@ -104,6 +110,7 @@ function BoardsShowController(Board, $state, $auth) {
   }
 
   boardsShow.delete = deleteBoard;
+  boardsShow.repinPin = repinPin;
   boardsShow.update = update;
   boardsShow.createPin = createPin;
   boardsShow.repin = repin;

@@ -5,8 +5,6 @@
 @import 'neat/neat';
 @import 'base/base';
 
-// variables
-
 // extends
 .overlay {
   @include position(absolute, 0 0 0 0);
@@ -189,7 +187,7 @@ main {
       }
     }
     &:hover {
-      .board__overlay {
+      .boards__overlay {
         opacity: 1;
       }
     }
@@ -275,6 +273,20 @@ main {
     button {
       width: 100%;
       margin-bottom: 0.75em;
+    }
+    @media screen and (max-width: 767px) {
+      width: 90%;
+    }
+
+    .boards {
+      &__board {
+        cursor: pointer;
+        a {
+          h2 {
+            font-size: 16px;
+          }
+        }
+      }
     }
   }
 }

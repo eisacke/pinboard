@@ -1,6 +1,6 @@
 <ul class="boards">
   <li ng-repeat="board in boardsIndex.all" class="boards__board" style="background-image:url('{{ board.pins[0].source }}')">
-    <div class="board__overlay"></div>
+    <div class="boards__overlay"></div>
     <a ui-sref="boardsShow({ id: board._id })">
       <h2>{{ board.title }}</h2>
     </a>

@@ -1,1 +1,9 @@
-<button>Repin</button>
+<ul class="boards">
+  <li ng-repeat="board in boardsShow.userBoards" class="boards__board" style="background-image:url('{{ board.pins[0].source }}')" ng-hide="board._id === boardsShow.board._id">
+    <div class="boards__overlay"></div>
+    <a ng-click="boardsShow.repinPin(board)">
+      <h2>{{ board.title }}</h2>
+    </a>
+  </li>
+</ul>
+<button ng-click="boardsShow.toggleForm()">Cancel</button>
