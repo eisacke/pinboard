@@ -51,6 +51,7 @@ function BoardsShowController(Board, $state, $auth) {
   boardsShow.update = update;
   boardsShow.createPin = createPin;
   boardsShow.repin = repin;
+  boardsShow.mobile = mobile;
   boardsShow.like = like;
   boardsShow.isLoggedIn = $auth.isAuthenticated;
 
@@ -61,6 +62,10 @@ function BoardsShowController(Board, $state, $auth) {
       boardsShow.belongsToUser = true;
     }
   });
+
+  function mobile($index) {
+    boardsShow.board.pins[$index].active = boardsShow.board.pins[$index].active ? false : true; 
+  }
 
   function deletePin(pin) {
     const index = boardsShow.board.pins.indexOf(pin);

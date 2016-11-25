@@ -243,6 +243,11 @@ header {
     }
   }
   &__overlay {
+    @media screen and (max-width: 767px) {
+      &.active {
+        opacity: 1;
+      }
+    }
     @extend .overlay;
     bottom: 0.25em;
     color: #FFFFFF;

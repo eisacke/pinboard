@@ -10,9 +10,9 @@
   </div>
 
   <ul class="pins">
-    <li ng-repeat="pin in boardsShow.board.pins" class="pins__pin">
+    <li ng-repeat="pin in boardsShow.board.pins" class="pins__pin" ng-click="boardsShow.mobile($index)">
       <img ng-if="pin.type == 'image'" ng-src="{{ pin.source }}">
-      <div class="pins__overlay">
+      <div class="pins__overlay" ng-class="{ active: pin.active }">
         <span class="like" ng-click="boardsShow.like(pin)" ng-class="{liked: pin.likes.indexOf(boardsShow.currentUser) > -1}"> {{pin.likes.length || 0}} likes</span>
         <span class="delete" ng-click="boardsShow.deletePin(pin)" ng-if="boardsShow.belongsToUser"></span>
         <span class="pin" ng-click="boardsShow.repin(pin)" ui-sref="boardsShow.repin"></span>
