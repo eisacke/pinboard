@@ -177,8 +177,12 @@ header {
   .edit {
     @extend .icon-pencil;
     position: absolute;
-    top: 0;
-    right: 20px;
+    top: 6px;
+    right: 130px;
+    @media screen and (max-width: 767px) {
+      right: 20px;
+      top: 0;
+    }
     &:before {
       cursor: pointer;
       font-size: 20px;
