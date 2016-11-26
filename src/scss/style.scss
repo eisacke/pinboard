@@ -30,9 +30,8 @@ img {
 
 main {
   @include outer-container;
-  padding: 0 20px;
+  padding: 0 20px 20px;
   position: relative;
-  margin-bottom: 50px;
 }
 
 form {
@@ -165,6 +164,7 @@ header {
       font-size: 16px;
       span {
         font-style: italic;
+        cursor: pointer;
       }
     }
   }
