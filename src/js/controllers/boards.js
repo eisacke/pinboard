@@ -7,7 +7,6 @@ angular.module('pinboardApp')
 BoardsIndexController.$inject = ['Board'];
 function BoardsIndexController(Board) {
   const boardsIndex = this;
-
   boardsIndex.all = Board.query();
 }
 
@@ -15,8 +14,6 @@ BoardsProfileController.$inject = ['Board', '$auth'];
 function BoardsProfileController(Board, $auth) {
   const boardsProfile = this;
   const currentUser = $auth.getPayload()._id;
-  boardsProfile.testing = 'Hello';
-
   boardsProfile.all = Board.query({user: currentUser});
 }
 
@@ -27,14 +24,13 @@ function BoardsNewController(Board, $state, $auth) {
 
   boardsNew.board = {};
   boardsNew.board.user = currentUser;
+  boardsNew.create = create;
 
   function create() {
     Board.save(boardsNew.board, () => {
       $state.go('boardsIndex');
     });
   }
-
-  boardsNew.create = create;
 }
 
 BoardsShowController.$inject = ['Board', '$state', '$auth'];
@@ -124,5 +120,4 @@ function BoardsShowController(Board, $state, $auth) {
       $state.go('boardsIndex');
     });
   }
-
 }

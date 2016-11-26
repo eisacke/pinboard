@@ -1,6 +1,7 @@
 <div class="boards--show">
-  <h2 ng-class="{ edit: boardsShow.belongsToUser }" ui-sref="boardsShow.edit" ng-click="boardsShow.toggleForm()">{{boardsShow.board.title}}</h2>
-  <h3>{{boardsShow.user.username}}</h3>
+  <h2>{{boardsShow.board.title}}</h2>
+  <span ng-class="{ edit: boardsShow.belongsToUser }" ui-sref="boardsShow.edit" ng-click="boardsShow.toggleForm()"></span>
+  <h3>by <span class="italic">{{boardsShow.user.username}}</span></h3>
   <button class="pins__add" ng-click="boardsShow.toggleForm()" ui-sref="boardsShow.newPin">Add pin</button>
 
   <div class="modal" ng-show="boardsShow.formVisible">

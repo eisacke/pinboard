@@ -32,6 +32,9 @@ function MainController($auth, $state, $rootScope) {
       e.preventDefault();
       $state.go('login');
       main.message = 'You must be logged in to go there!';
+    } else if ($auth.isAuthenticated() && toState.name === 'home') {
+      e.preventDefault();
+      $state.go('boardsIndex');
     }
   }
 
