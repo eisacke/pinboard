@@ -18,7 +18,9 @@
     "angular": "^1.5.8",
     "angular-resource": "^1.5.8",
     "angular-ui-router": "^0.3.2",
-    "satellizer": "^0.15.5",
-    "angular-masonry": "^0.16.0"
+    "satellizer": "^0.15.5"
+  },
+  "resolutions": {
+    "angular": "^1.5.8"
   }
 }
